@@ -1,4 +1,4 @@
-/* The for principles of "this";
+/* The for principles of "this"; //my initial commit comment
 * in your own words. explain the four principle for the "this" keyword below.
 *
 * 1. 
