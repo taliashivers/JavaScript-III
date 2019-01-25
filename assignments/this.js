@@ -13,60 +13,47 @@
 
 // code example for Window Binding
 
-window._ = {};
+function sayName(name) {
+    console.log(this);
+    return name;
+}
 
+sayName("Talia");
 // Principle 2
 
 // code example for Implicit Binding
 
-function foo() {
-    console.log(this.a);
-}
-
-const obj2 = {
-    a: 10,
-    foo: foo
+const myObj = {
+    greeting: 'Hello',
+    sayHello: function(name) {
+        console.log(`${this.greeting}  my name is  ${name}`);
+        console.log(this);
+    }
 };
 
-const obj1 = {
-    a: 4,
-    obj2: obj2
-};
-
-obj1.obj2.foo();
+myObj.sayHello('Ryan');
 
 // Principle 3
 
 // code example for New Binding
 
-function foo(a) {
-    this.a = a;
-}
-
-var bar = new foo ( 2 );
-console.log( bar.a );
+function CordialPerson(greeter) {
+    this.greeting = 'Hello ';
+    this.greeter = greeter;
+    this.speak = function() {
+      console.log(this.greeting + this.greeter);
+      console.log(this);
+    };
+  }
+  
+  const jerry = new CordialPerson('Newman');
+  const newman = new CordialPerson('Jerry');
+  
+  newman.speak();
+  newman.speak();
 
 // Principle 4
 
 // code example for Explicit Binding
 
-function foo(something) {
-    console.log( this.a, something );
-    return this.a + something;
-  }
-  
-   // simple `bind` helper
-  function bind(fn, obj) {
-    return function() {
-      return fn.apply( obj, arguments );
-    };
-  }
-  
-   var obj = {
-    a: 2
-  };
-  
-   var bar = bind( foo, obj );
-  
-   var b = bar( 3 );
-  console.log( b );
+jerry.speak.call(newman); newman.speak.apply(jerry);
